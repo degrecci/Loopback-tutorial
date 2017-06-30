@@ -1,0 +1,58 @@
+{
+  "name": "Product",
+  "plural": "Products",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "categoryId": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "category": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "categoryId"
+    }
+  },
+  "acls": [],
+  "methods": {
+    "prototype.buy": {
+      "accepts": [
+        {
+          "arg": "quantity",
+          "type": "number",
+          "required": true,
+          "description": "Number of products to buy"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "object",
+          "root": true,
+          "description": "The result of the purchase"
+        }
+      ],
+      "description": "Buy this product",
+      "http": [
+        {
+          "path": "/buy",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}
